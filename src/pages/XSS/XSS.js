@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Input, Row, Col, Divider, Table } from 'antd';
 import { db, columns } from "./db"
-import { backendCodes } from "./codes"
+import { backendCodes, readySqlCodes } from "./codes"
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css';
 
@@ -24,17 +24,17 @@ class XSS extends Component {
                     <Divider>Search boxes</Divider>
                     <p>Search box without detecting XSS attack</p>
                     <Search
-                        placeholder="Enter name or age to search (Not detect XSS attack)"
+                        placeholder="Enter user name (Not detect XSS attack)"
                         onSearch={value => console.log(value)}
                         enterButton
                     />
                     <p>Search box with detecting XSS attack</p>
                     <Search
-                        placeholder="Enter name or age to search (Detect XSS attack)"
+                        placeholder="Enter user name (Detect XSS attack)"
                         onSearch={value => console.log(value)}
                         enterButton
                     />
-                    <Divider>Database</Divider>
+                    <Divider>Database: user Table</Divider>
                     <Table dataSource={db} columns={columns} />
                 </Col>
                 <Col span={8}>
@@ -47,8 +47,7 @@ class XSS extends Component {
                     <Divider>Logger</Divider>
                     <pre>
                         <code className="sql">
-                            select * from users
-                            where userID = "1"
+                            {readySqlCodes}
                         </code>
                     </pre>
                 </Col>

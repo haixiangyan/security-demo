@@ -13,11 +13,11 @@ export const db = [{
 }]
 
 export const columns = [{
-    title: 'Name',
+    title: 'user_name',
     dataIndex: 'name',
     key: 'name',
 }, {
-    title: 'Age',
+    title: 'user_age',
     dataIndex: 'age',
     key: 'age',
 }];

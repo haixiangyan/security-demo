@@ -14,3 +14,10 @@ String sql = "select * from user
 // Make query
 Statement stmt = conn.createStatement();
 ResultSet rs = stmt.executeQuery(sql);`
+
+export const readySqlCodes = `Loading Database...
+Data base loaded...
+
+Enter user name to make a query...
+
+select * from user where user_name = "Jack"`

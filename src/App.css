@@ -5,3 +5,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.app-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-content {
+    padding: 30px;
+}

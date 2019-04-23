@@ -21,6 +21,7 @@ class App extends Component {
         return (
             <Router className="App">
                 <Menu
+                    className="app-menu"
                     onClick={this.onChangeMenu}
                     selectedKeys={[this.state.current]}
                     mode="horizontal">
@@ -34,10 +35,12 @@ class App extends Component {
                         <Link to="/ddos">DDoS</Link>
                     </Menu.Item>
                 </Menu>
-                <Route path="/" exact component={XSS}/>
-                <Route path="/xss" component={XSS}/>
-                <Route path="/csrf" component={CSRF}/>
-                <Route path="/ddos" component={DDoS}/>
+                <div className="app-content">
+                    <Route path="/" exact component={XSS}/>
+                    <Route path="/xss" component={XSS}/>
+                    <Route path="/csrf" component={CSRF}/>
+                    <Route path="/ddos" component={DDoS}/>
+                </div>
             </Router>
         )
     }

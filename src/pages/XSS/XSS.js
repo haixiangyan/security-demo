@@ -1,12 +1,20 @@
 import React, {Component} from 'react'
 import { Input, Row, Col, Divider, Table } from 'antd';
-import { db, columns } from "../db/xssDB"
+import { db, columns } from "./db"
+import { backendCodes } from "./codes"
+import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css';
 
 const Search = Input.Search;
 
 class XSS extends Component {
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
+        const codePads = document.querySelectorAll('pre code')
+        codePads.forEach(codePad => hljs.highlightBlock(codePad))
     }
 
     render() {
@@ -30,7 +38,19 @@ class XSS extends Component {
                     <Table dataSource={db} columns={columns} />
                 </Col>
                 <Col span={8}>
-                    Program
+                    <Divider>Vulnerable Codes</Divider>
+                    <pre>
+                        <code className="java">
+                            {backendCodes}
+                        </code>
+                    </pre>
+                    <Divider>Logger</Divider>
+                    <pre>
+                        <code className="sql">
+                            select * from users
+                            where userID = "1"
+                        </code>
+                    </pre>
                 </Col>
             </Row>
         )

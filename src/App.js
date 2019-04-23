@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Link, Route} from "react-router-dom"
 import {Menu, SubMenu} from 'antd'
 import './App.css'
-import XSS from "./pages/XSS"
+import XSS from "./pages/XSS/XSS"
 import CSRF from "./pages/CSRF"
 import DDoS from "./pages/DDoS"
 

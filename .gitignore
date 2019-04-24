@@ -103,3 +103,6 @@ typings/
 
 # Idea
 /.idea
+
+# build
+/build

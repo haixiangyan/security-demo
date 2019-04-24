@@ -53,6 +53,7 @@ select * from user where user_name = '${keyword}'`
         console.log(logs)
         return (
             <Row gutter={16} type="flex" justify="center" className="XSS">
+                {/*Left*/}
                 <Col span={8}>
                     <Divider>Search boxes</Divider>
                     <p>Search box without detecting XSS attack</p>
@@ -70,6 +71,7 @@ select * from user where user_name = '${keyword}'`
                     <Divider>Database: user Table</Divider>
                     <Table dataSource={db} columns={columns}/>
                 </Col>
+                {/*Right*/}
                 <Col span={8}>
                     <Divider>Vulnerable Codes</Divider>
                     <pre>
@@ -77,7 +79,7 @@ select * from user where user_name = '${keyword}'`
                             {backendCodes}
                         </code>
                     </pre>
-                    <Divider>Logger</Divider>
+                    <Divider>SQL Logger</Divider>
                     <pre>
                         <code className="sql">
                             {readySqlCodes}

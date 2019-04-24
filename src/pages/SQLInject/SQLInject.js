@@ -59,7 +59,7 @@ select * from user where user_name = '${keyword}'`
                       <Search
                         placeholder="Enter user name"
                         onSearch={this.onAttackSearch}
-                        enterButton
+                        enterButton="Search User"
                       />
                   </Col>
                   {/*Right*/}

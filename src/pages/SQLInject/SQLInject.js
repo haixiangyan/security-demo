@@ -45,16 +45,18 @@ select * from user where user_name = '${keyword}'`
                   {/*Left*/}
                   <Col span={8}>
                       <Divider>Frontend</Divider>
-                      <p>Try following keyword to break the database</p>
-                      <ul>
-                          <li>'; drop database 'user</li>
-                          <li>'; delete user where '1' = '1</li>
-                      </ul>
+                      <h3>Enter user name for searching user</h3>
                       <Search
                         placeholder="Enter user name"
                         onSearch={this.onAttackSearch}
                         enterButton="Search User"
                       />
+                      <Divider>Tips</Divider>
+                      <p>Try following keyword to break the database</p>
+                      <ul>
+                          <li>'; drop database 'user</li>
+                          <li>'; delete user where '1' = '1</li>
+                      </ul>
                   </Col>
                   {/*Right*/}
                   <Col span={8}>

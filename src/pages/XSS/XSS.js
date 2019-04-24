@@ -73,6 +73,7 @@ class XSS extends Component {
                         {/*Review list*/}
                         <ul id="review-list"/>
 
+                        {/*Frontend Codes*/}
                         <Divider>Frontend Codes</Divider>
                         <pre>
                             <code className="html">
@@ -80,6 +81,7 @@ class XSS extends Component {
                             </code>
                         </pre>
 
+                        {/*Tips*/}
                         <Divider>Tips</Divider>
                         <p>Try following keyword to break the frontend</p>
                         <ul>

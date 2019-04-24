@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {Input, Row, Col, Divider, Table} from 'antd'
-import {db, columns} from "./db"
-import {backendCodes, readySqlCodes} from "./codes"
+import {Col, Divider, Input, Row, Table} from 'antd'
+import {columns, db} from "./db"
+import {readySqlCodes} from "./codes"
 import hljs from 'highlight.js'
 import './styles.css'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -51,7 +51,7 @@ select * from user where user_name = '${keyword}'`
               <Row gutter={16} type="flex" justify="center">
                   {/*Left*/}
                   <Col span={8}>
-                      <Divider>Search boxes</Divider>
+                      <Divider>Frontend</Divider>
                       <p>Try following keyword to break the database</p>
                       <ul>
                           <li>'; drop database 'user</li>
@@ -62,17 +62,11 @@ select * from user where user_name = '${keyword}'`
                         onSearch={this.onAttackSearch}
                         enterButton
                       />
-                      <Divider>Database: user Table</Divider>
-                      <Table dataSource={db} columns={columns}/>
                   </Col>
                   {/*Right*/}
                   <Col span={8}>
-                      <Divider>Java Backend</Divider>
-                      <pre>
-                        <code className="java">
-                            {backendCodes}
-                        </code>
-                    </pre>
+                      <Divider>Backend: 'user' Database</Divider>
+                      <Table dataSource={db} columns={columns}/>
                       <Divider>SQL Logger</Divider>
                       <pre>
                         <code className="sql">

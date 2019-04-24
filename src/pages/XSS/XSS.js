@@ -3,6 +3,7 @@ import {Input, Row, Col, Divider, Table} from 'antd'
 import {db, columns} from "./db"
 import {backendCodes, readySqlCodes} from "./codes"
 import hljs from 'highlight.js'
+import './styles.css'
 import 'highlight.js/styles/atom-one-dark.css'
 
 const Search = Input.Search
@@ -19,9 +20,9 @@ class XSS extends Component {
         this.highlight()
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     this.highlight()
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.highlight()
+    }
 
     highlight = () => {
         const codePads = document.querySelectorAll('pre code')
@@ -39,13 +40,11 @@ class XSS extends Component {
 
     addLogs = (keyword) => {
         const {logs} = this.state
-        const sql = `select * from user where use_name = '${keyword}'`
+        const sql = `
+# Searching "${keyword}"
+select * from user where user_name = '${keyword}'`
         this.setState({
-            logs: [ ...logs, {
-                    id: logs.length,
-                    code: sql
-                }
-            ]
+            logs: [ ...logs, sql]
         })
     }
 
@@ -82,15 +81,9 @@ class XSS extends Component {
                     <pre>
                         <code className="sql">
                             {readySqlCodes}
+                            {logs.map(log => `\n${log}`)}
                         </code>
                     </pre>
-                    {
-                        logs.map(log => (
-                            <pre key={log.id}>
-                                <code>{log.code}</code>
-                            </pre>
-                        ))
-                    }
                 </Col>
             </Row>
         )

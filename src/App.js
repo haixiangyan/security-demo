@@ -3,8 +3,8 @@ import {BrowserRouter as Router, Link, Route} from "react-router-dom"
 import {Menu, SubMenu} from 'antd'
 import './App.css'
 import XSS from "./pages/XSS/XSS"
-import CSRF from "./pages/CSRF"
-import DDoS from "./pages/DDoS"
+import CSRF from "./pages/CSRF/CSRF"
+import DDoS from "./pages/DDoS/DDoS"
 
 class App extends Component {
     state = {

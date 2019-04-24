@@ -34,18 +34,26 @@ class XSS extends Component {
                     {/*Left*/}
                     <Col span={8}>
                         <Divider>Frontend</Divider>
+                        <h3>Review List</h3>
+                        {/*Add review input*/}
+                        <Search
+                            placeholder="Enter a movie review"
+                            onSearch={this.onAddReview}
+                            enterButton="Add Review"
+                        />
+
+                        {/*Review list*/}
+                        <ul>
+                            { db.map(reviewItem => <li key={reviewItem.id}>{reviewItem.content}</li>) }
+                        </ul>
+
+                        <Divider>Tips</Divider>
                         <p>Try following keyword to break the frontend</p>
                         <ul>
                             <li>{alertCode}</li>
                             <li>{outsideCode}</li>
                             <li>{stealCookie}</li>
                         </ul>
-
-                        <Search
-                            placeholder="Enter a movie review"
-                            onSearch={this.onAddReview}
-                            enterButton="Add Review"
-                        />
                     </Col>
                     {/*Right*/}
                     <Col span={8}>

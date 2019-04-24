@@ -8,7 +8,7 @@ import 'highlight.js/styles/atom-one-dark.css'
 
 const Search = Input.Search
 
-class XSS extends Component {
+class SQLInject extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,42 +46,45 @@ select * from user where user_name = '${keyword}'`
         const {logs} = this.state
         console.log(logs)
         return (
-            <Row gutter={16} type="flex" justify="center" className="XSS">
-                {/*Left*/}
-                <Col span={8}>
-                    <Divider>Search boxes</Divider>
-                    <p>Try following keyword to break the database</p>
-                    <ul>
-                        <li>'; drop database 'user</li>
-                        <li>'; delete user where '1' = '1</li>
-                    </ul>
-                    <Search
-                        placeholder="Enter user name (Not detect XSS attack)"
+          <div>
+              <h1 style={{textAlign: 'center'}}>SQL Injection Attack</h1>
+              <Row gutter={16} type="flex" justify="center">
+                  {/*Left*/}
+                  <Col span={8}>
+                      <Divider>Search boxes</Divider>
+                      <p>Try following keyword to break the database</p>
+                      <ul>
+                          <li>'; drop database 'user</li>
+                          <li>'; delete user where '1' = '1</li>
+                      </ul>
+                      <Search
+                        placeholder="Enter user name"
                         onSearch={this.onAttackSearch}
                         enterButton
-                    />
-                    <Divider>Database: user Table</Divider>
-                    <Table dataSource={db} columns={columns}/>
-                </Col>
-                {/*Right*/}
-                <Col span={8}>
-                    <Divider>Java Backend</Divider>
-                    <pre>
+                      />
+                      <Divider>Database: user Table</Divider>
+                      <Table dataSource={db} columns={columns}/>
+                  </Col>
+                  {/*Right*/}
+                  <Col span={8}>
+                      <Divider>Java Backend</Divider>
+                      <pre>
                         <code className="java">
                             {backendCodes}
                         </code>
                     </pre>
-                    <Divider>SQL Logger</Divider>
-                    <pre>
+                      <Divider>SQL Logger</Divider>
+                      <pre>
                         <code className="sql">
                             {readySqlCodes}
                             {logs.map(log => `\n${log}`)}
                         </code>
                     </pre>
-                </Col>
-            </Row>
+                  </Col>
+              </Row>
+          </div>
         )
     }
 }
 
-export default XSS
+export default SQLInject

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Link, Route} from "react-router-dom"
 import {Menu, SubMenu} from 'antd'
 import './App.css'
-import XSS from "./pages/XSS/XSS"
+import SQLInject from "./pages/SQLInject/SQLInject"
 import CSRF from "./pages/CSRF/CSRF"
 import DDoS from "./pages/DDoS/DDoS"
 
@@ -36,8 +36,8 @@ class App extends Component {
                     </Menu.Item>
                 </Menu>
                 <div className="app-content">
-                    <Route path="/" exact component={XSS}/>
-                    <Route path="/xss" component={XSS}/>
+                    <Route path="/" exact component={SQLInject}/>
+                    <Route path="/sql-inject" component={SQLInject}/>
                     <Route path="/csrf" component={CSRF}/>
                     <Route path="/ddos" component={DDoS}/>
                 </div>

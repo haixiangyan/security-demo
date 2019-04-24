@@ -41,8 +41,11 @@ class CSRF extends Component {
                         {/*Tips*/}
                         <Divider>Tips</Divider>
                         <p>Try following keyword to break the frontend</p>
-                        <ul>
-                        </ul>
+                        <ol>
+                            <li>Login with any email and password</li>
+                            <li>Click the link that user sends</li>
+                            <li>Boom, your account has been stolen 300 bucks</li>
+                        </ol>
                     </Col>
                     {/*Right*/}
                     <Col span={8}>

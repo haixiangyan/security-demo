@@ -44,10 +44,9 @@ select * from user where user_name = '${keyword}'`
 
     render() {
         const {logs} = this.state
-        console.log(logs)
         return (
           <div>
-              <h1 style={{textAlign: 'center'}}>SQL Injection Attack</h1>
+              <h1 style={{textAlign: 'center'}}>User Module (SQL Inject Attack)</h1>
               <Row gutter={16} type="flex" justify="center">
                   {/*Left*/}
                   <Col span={8}>

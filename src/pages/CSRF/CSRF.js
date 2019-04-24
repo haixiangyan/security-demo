@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import {Row, Col, Input, Divider, Table, Form, Icon, Button} from "antd"
-const Search = Input.Search
+import {Button, Col, Divider, Form, Icon, Input, notification, Row} from "antd"
 
 class CSRF extends Component {
     constructor(props) {
@@ -10,11 +9,29 @@ class CSRF extends Component {
         }
     }
 
-    onSubmit = () => {
+    openNotification = () => {
+        const key = `open${Date.now()}`
+        const btn = (
+            <a href="#">http://bank.example/withdraw?account=Bob&amount=1000000&for=Evil</a>
+        )
+        notification.open({
+            message: 'Hacker Message',
+            description: 'Click the link below to see something new XD',
+            btn,
+            key,
+        })
+    }
 
+    onLogin = () => {
+        this.setState({
+            isLogin: true
+        })
+
+        this.openNotification()
     }
 
     render() {
+        const {isLogin} = this.state
         return (
             <div>
                 <h1 style={{textAlign: 'center'}}>Login Module (CSRF Attack)</h1>
@@ -23,20 +40,25 @@ class CSRF extends Component {
                     <Col span={8}>
                         <Divider>Frontend</Divider>
                         <h3>Review List</h3>
-                        {/*Add review input*/}
-                        <Form onSubmit={this.onSubmit} className="login-form">
-                            <Form.Item>
-                                <Input prefix={<Icon type="user"/>} placeholder="Username" />
-                            </Form.Item>
-                            <Form.Item>
-                                <Input prefix={<Icon type="lock"/>} type="password" placeholder="Password" />
-                            </Form.Item>
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" block className="login-form-button">
-                                    Log in
-                                </Button>
-                            </Form.Item>
-                        </Form>
+                        {
+                            isLogin ?
+                                <div>You are logged in</div>
+                                :
+                                <Form className="login-form">
+                                    <Form.Item>
+                                        <Input prefix={<Icon type="user"/>} placeholder="Username"/>
+                                    </Form.Item>
+                                    <Form.Item>
+                                        <Input prefix={<Icon type="lock"/>} type="password" placeholder="Password"/>
+                                    </Form.Item>
+                                    <Form.Item>
+                                        <Button onClick={this.onLogin} type="primary" block
+                                                className="login-form-button">
+                                            Log in
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+                        }
 
                         {/*Tips*/}
                         <Divider>Tips</Divider>
@@ -46,11 +68,6 @@ class CSRF extends Component {
                             <li>Click the link that user sends</li>
                             <li>Boom, your account has been stolen 300 bucks</li>
                         </ol>
-                    </Col>
-                    {/*Right*/}
-                    <Col span={8}>
-                        <Divider>Backend: 'review' Database</Divider>
-                        {/*<Table dataSource={db} columns={columns}/>*/}
                     </Col>
                 </Row>
             </div>

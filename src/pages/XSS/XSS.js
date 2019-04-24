@@ -8,9 +8,15 @@ const Search = Input.Search
 class XSS extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            db
-        }
+        this.state = { db }
+    }
+
+    componentDidMount() {
+        this.updateReviewList()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.updateReviewList()
     }
 
     onAddReview = (review) => {
@@ -21,6 +27,19 @@ class XSS extends Component {
                 id: db.length + 1,
                 content: review
             }]
+        })
+    }
+
+    updateReviewList = () => {
+        const {db} = this.state
+        const reviewList = document.querySelector('#review-list')
+        reviewList.innerHTML = ''
+
+        db.forEach(reviewItem => {
+            const liItem = document.createElement('li')
+            liItem.innerHTML = reviewItem.content
+
+            reviewList.appendChild(liItem)
         })
     }
 
@@ -43,9 +62,7 @@ class XSS extends Component {
                         />
 
                         {/*Review list*/}
-                        <ul>
-                            { db.map(reviewItem => <li key={reviewItem.id}>{reviewItem.content}</li>) }
-                        </ul>
+                        <ul id="review-list"></ul>
 
                         <Divider>Tips</Divider>
                         <p>Try following keyword to break the frontend</p>

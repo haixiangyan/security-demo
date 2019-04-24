@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {Row, Col, Divider, Table, Input} from "antd"
-import {db, columns} from './db'
+import {Col, Divider, Input, Row, Table} from "antd"
+import {columns, db} from './db'
 import {alertCode, outsideCode, stealCookie} from "./codes"
+import {highlight} from "../../utils/utils"
 
 const Search = Input.Search
 
@@ -13,10 +14,12 @@ class XSS extends Component {
 
     componentDidMount() {
         this.updateReviewList()
+        highlight()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.updateReviewList()
+        highlight()
     }
 
     onAddReview = (review) => {
@@ -43,9 +46,15 @@ class XSS extends Component {
         })
     }
 
+    getFrontendCodes = () => {
+        let html = `<ul>\n`
+        this.state.db.forEach(reviewItem => html += `    <li>${reviewItem.content}</li>\n`)
+        html += '</ul>'
+        return html
+    }
+
     render() {
         const {db} = this.state
-        console.log(db)
         return (
             <div>
                 <h1 style={{textAlign: 'center'}}>Review Module (XSS Attack)</h1>
@@ -62,7 +71,14 @@ class XSS extends Component {
                         />
 
                         {/*Review list*/}
-                        <ul id="review-list"></ul>
+                        <ul id="review-list"/>
+
+                        <Divider>Frontend Codes</Divider>
+                        <pre>
+                            <code className="html">
+                                {this.getFrontendCodes()}
+                            </code>
+                        </pre>
 
                         <Divider>Tips</Divider>
                         <p>Try following keyword to break the frontend</p>

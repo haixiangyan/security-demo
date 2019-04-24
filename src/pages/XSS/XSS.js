@@ -33,15 +33,9 @@ class XSS extends Component {
         this.addLogs(value)
     }
 
-    onSafeSearch = (value) => {
-        console.log(value)
-        this.addLogs(value)
-    }
-
     addLogs = (keyword) => {
         const {logs} = this.state
         const sql = `
-# Searching "${keyword}"
 select * from user where user_name = '${keyword}'`
         this.setState({
             logs: [ ...logs, sql]
@@ -56,16 +50,14 @@ select * from user where user_name = '${keyword}'`
                 {/*Left*/}
                 <Col span={8}>
                     <Divider>Search boxes</Divider>
-                    <p>Search box without detecting XSS attack</p>
+                    <p>Try following keyword to break the database</p>
+                    <ul>
+                        <li>'; drop database 'user</li>
+                        <li>'; delete user where '1' = '1</li>
+                    </ul>
                     <Search
                         placeholder="Enter user name (Not detect XSS attack)"
                         onSearch={this.onAttackSearch}
-                        enterButton
-                    />
-                    <p>Search box with detecting XSS attack</p>
-                    <Search
-                        placeholder="Enter user name (Detect XSS attack)"
-                        onSearch={this.onSafeSearch}
                         enterButton
                     />
                     <Divider>Database: user Table</Divider>
@@ -73,7 +65,7 @@ select * from user where user_name = '${keyword}'`
                 </Col>
                 {/*Right*/}
                 <Col span={8}>
-                    <Divider>Vulnerable Codes</Divider>
+                    <Divider>Java Backend</Divider>
                     <pre>
                         <code className="java">
                             {backendCodes}

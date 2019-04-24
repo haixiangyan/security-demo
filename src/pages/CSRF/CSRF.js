@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
-import {Button, Col, Divider, Form, Icon, Input, notification, Row} from "antd"
+import {Button, Col, Divider, Form, Icon, Input, notification, Row, message} from "antd"
 
 class CSRF extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLogin: false
+            isLogin: false,
+            account: '',
+            password: ''
         }
     }
 
@@ -23,6 +25,11 @@ class CSRF extends Component {
     }
 
     onLogin = () => {
+        if (this.state.account !== 'Bob' || this.state.password !== '123') {
+            message.error("Invalid account or password")
+            return
+        }
+
         this.setState({
             isLogin: true
         })
@@ -31,7 +38,7 @@ class CSRF extends Component {
     }
 
     render() {
-        const {isLogin} = this.state
+        const {isLogin, account, password} = this.state
         return (
             <div>
                 <h1 style={{textAlign: 'center'}}>Login Module (CSRF Attack)</h1>
@@ -46,10 +53,21 @@ class CSRF extends Component {
                                 :
                                 <Form className="login-form">
                                     <Form.Item>
-                                        <Input prefix={<Icon type="user"/>} placeholder="Username"/>
+                                        <Input
+                                            value={account}
+                                            prefix={<Icon type="user"/>}
+                                            placeholder="Bob is the account"
+                                            onChange={event => this.setState({account: event.target.value})}
+                                        />
                                     </Form.Item>
                                     <Form.Item>
-                                        <Input prefix={<Icon type="lock"/>} type="password" placeholder="Password"/>
+                                        <Input
+                                            value={password}
+                                            prefix={<Icon type="lock"/>}
+                                            type="password"
+                                            placeholder="123 is the password"
+                                            onChange={event => this.setState({password: event.target.value})}
+                                        />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button onClick={this.onLogin} type="primary" block

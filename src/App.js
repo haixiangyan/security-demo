@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Link, Route} from "react-router-dom"
 import {Menu, SubMenu} from 'antd'
 import './App.css'
+import 'highlight.js/styles/atom-one-dark.css'
 import XSS from './pages/XSS/XSS'
 import SQLInject from "./pages/SQLInject/SQLInject"
 import CSRF from "./pages/CSRF/CSRF"

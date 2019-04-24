@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import {Col, Divider, Input, Row, Table} from 'antd'
 import {columns, db} from "./db"
 import {readySqlCodes} from "./codes"
-import hljs from 'highlight.js'
 import './styles.css'
-import 'highlight.js/styles/atom-one-dark.css'
+import {highlight} from "../../utils/utils"
 
 const Search = Input.Search
 
@@ -17,16 +16,11 @@ class SQLInject extends Component {
     }
 
     componentDidMount() {
-        this.highlight()
+        highlight()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.highlight()
-    }
-
-    highlight = () => {
-        const codePads = document.querySelectorAll('pre code')
-        codePads.forEach(codePad => hljs.highlightBlock(codePad))
+        highlight()
     }
 
     onAttackSearch = (value) => {

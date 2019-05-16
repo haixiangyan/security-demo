@@ -54,6 +54,8 @@ user sends other request, it will bring that token to server. Then server can us
 validate user identity. Even though attacker can forge a POST request, he can't get resources from server,
 because attacker won't send the token to server to validate his identity.
 
+![](../pics/CSRF_token.png)
+
 ```java
 HttpServletRequest req = (HttpServletRequest) request; 
 HttpSession s = req.getSession(); 

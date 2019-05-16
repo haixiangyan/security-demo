@@ -22,6 +22,8 @@ Now if the attacker place a link:
 in his hacker website, user will upload a post by clicking this link. Because user has already
 logged in their account, that post will be created and uploaded by the user.
 
+![](../pics/CSRF.png)
+
 This is just a simple example of CSRF. Forging a malicious uploading post request means attacker
 can also forge other huge-effect request, such as deleting posts, transferring money, updating password and etc.
 

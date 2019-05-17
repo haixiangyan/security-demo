@@ -8,7 +8,7 @@ class DDoS extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isAttacked: false,
+            timeId: 0,
             logs: []
         }
     }
@@ -18,20 +18,14 @@ class DDoS extends Component {
     }
 
     startAttack = () => {
-        this.setState({
-            isAttacked: true
-        })
-        // while(this.isAttacked != false) {
-        //     this.addLogs()
-        //     setTimeout(1000)
-        // }
-        this.addLogs()
+        const timeId = setInterval(() => {
+                this.addLogs()
+        }, 1000)
+        this.setState({ timeId })
     }
 
     stopAttack = () => {
-        this.setState({
-            isAttacked: false
-        })
+        window.clearInterval(this.state.timeId)
     }
 
     getRandomByte = () => {
@@ -52,26 +46,15 @@ class DDoS extends Component {
 
     addLogs = () => {
         const {logs} = this.state
-        const serverConsole = `
-tcp    0    0    ` + this.getRandomIp() + ':' + this.getRandomPort() + '    SYN_RECV'
+        const serverConsole = `tcp    0    0    ${this.getRandomIp()}:${this.getRandomPort()}\tSYN_RECV`
         const fin = serverConsole.padEnd(40)
         this.setState({
             logs: [ ...logs, fin]
         })
     }
 
-
-
-    // startAttack = () => {
-    //     var target = "http://localhost/#"
-    //     var xmlHttp = new XMLHttpRequest()
-    //     xmlHttp.open("GET", target, false)
-    //     xmlHttp.send("1")
-    //     return xmlHttp.responseText
-    // }
-
     render() {
-        const {isAttacked,logs} = this.state
+        const {logs} = this.state
         return (
             <div>
                 <h1 style={{textAlign: 'center'}}>Server Module(DDos attack)</h1>
@@ -83,7 +66,7 @@ tcp    0    0    ` + this.getRandomIp() + ':' + this.getRandomPort() + '    SYN_
                         <Button onClick={this.startAttack} type="primary" block>
                             Start DDos Attack
                         </Button>
-                        <Divider></Divider>
+                        <Divider/>
                         <Button onClick={this.stopAttack} type="primary" block>
                             Stop DDos Attack
                         </Button>

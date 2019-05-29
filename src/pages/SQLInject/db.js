@@ -1,4 +1,4 @@
-export const db = [{
+export const defaultDB = [{
     key: '1',
     name: 'Jack',
     age: 32,

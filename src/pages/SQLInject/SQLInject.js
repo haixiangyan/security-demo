@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Col, Divider, Input, Row, Table} from 'antd'
-import {columns, db} from "./db"
+import {columns, defaultDB} from "./db"
 import {readySqlCodes} from "./codes"
 import './styles.css'
 import {highlight} from "../../utils/utils"
@@ -11,11 +11,18 @@ class SQLInject extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            logs: []
+            logs: [],
+            db: null
         }
     }
 
     componentDidMount() {
+        let db = localStorage.getItem('sqlInjectDB')
+        if (!db) {
+            db = defaultDB
+            localStorage.setItem('sqlInjectDB', JSON.stringify(db))
+        }
+        this.setState({ db: JSON.parse(db) })
         highlight()
     }
 
@@ -31,13 +38,22 @@ class SQLInject extends Component {
         const {logs} = this.state
         const sql = `
 select * from user where user_name = '${keyword}'`
+        // Drop database
+        if (keyword.indexOf('drop')) {
+            this.setState({
+                logs: [ ...logs, sql],
+                db: []
+            })
+        }
+
+        // Normal
         this.setState({
             logs: [ ...logs, sql]
         })
     }
 
     render() {
-        const {logs} = this.state
+        const {logs, db} = this.state
         return (
           <div>
               <h1 style={{textAlign: 'center'}}>User Module (SQL Inject Attack)</h1>
@@ -61,6 +77,7 @@ select * from user where user_name = '${keyword}'`
                   {/*Right*/}
                   <Col span={8}>
                       <Divider>Backend: 'user' Database</Divider>
+                      <Table dataSource={db} columns={columns}/>
                       <Divider>SQL Logger</Divider>
                       <pre>
                         <code className="sql">

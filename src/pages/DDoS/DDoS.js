@@ -8,6 +8,7 @@ class DDoS extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isOpen: false,
             timeId: 0,
             logs: []
         }
@@ -21,11 +22,12 @@ class DDoS extends Component {
         const timeId = setInterval(() => {
                 this.addLogs()
         }, 1000)
-        this.setState({ timeId })
+        this.setState({ timeId, isOpen: true })
     }
 
     stopAttack = () => {
         window.clearInterval(this.state.timeId)
+        this.setState({ isOpen: false })
     }
 
     getRandomByte = () => {
@@ -46,7 +48,7 @@ class DDoS extends Component {
 
     addLogs = () => {
         const {logs} = this.state
-        const serverConsole = `tcp    0    0    111.22.33.4:80    ${this.getRandomIp()}:${this.getRandomPort()}\tSYN_RECV`
+        const serverConsole = `tcp    0    0    111.22.33.4:80    ${this.getRandomIp()}:${this.getRandomPort()}\t\tSYN_RECV`
         const fin = serverConsole.padEnd(40)
         this.setState({
             logs: [ ...logs, fin]
@@ -54,7 +56,7 @@ class DDoS extends Component {
     }
 
     render() {
-        const {logs} = this.state
+        const {logs, isOpen} = this.state
         return (
             <div>
                 <h1 style={{textAlign: 'center'}}>Server Module(DDos attack)</h1>
@@ -63,11 +65,11 @@ class DDoS extends Component {
                     <Col span={8}>
                         <Divider>Frontend</Divider>
                         <h3>Press the button to start DDos attack</h3>
-                        <Button onClick={this.startAttack} type="primary" block>
+                        <Button disabled={isOpen} onClick={this.startAttack} type="primary" block>
                             Start DDos Attack
                         </Button>
                         <Divider/>
-                        <Button onClick={this.stopAttack} type="primary" block>
+                        <Button onClick={this.stopAttack} type="danger" block>
                             Stop DDos Attack
                         </Button>
                     </Col>

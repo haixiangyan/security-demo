@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Col, Divider, Input, Row, Table} from "antd"
-import {columns, db} from './db'
+import {columns, defaultDB} from './db'
 import {alertCode, outsideCode, stealCookie} from "./codes"
 import {highlight} from "../../utils/utils"
 
@@ -9,10 +9,16 @@ const Search = Input.Search
 class XSS extends Component {
     constructor(props) {
         super(props)
-        this.state = { db }
+        this.state = { db: defaultDB }
     }
 
     componentDidMount() {
+        let db = localStorage.getItem("db")
+        if (!db) {
+            db = defaultDB
+            localStorage.setItem('db', JSON.stringify(db))
+        }
+        this.setState({ db: JSON.parse(db) })
         this.updateReviewList()
         highlight()
     }
@@ -24,12 +30,14 @@ class XSS extends Component {
 
     onAddReview = (review) => {
         const {db} = this.state
-        this.setState({
-            db: [...db, {
+        const newDB = [...db, {
                 key: db.length + 1,
                 id: db.length + 1,
                 content: review
-            }]
+        }]
+        localStorage.setItem('db', JSON.stringify(newDB))
+        this.setState({
+            db: newDB
         })
     }
 
@@ -39,6 +47,16 @@ class XSS extends Component {
         reviewList.innerHTML = ''
 
         db.forEach(reviewItem => {
+            // Execute evil codes
+            try {
+                if (reviewItem.content.indexOf('script') > 0) {
+                    let code = reviewItem.content.replace('<script>', '').replace('</script>', '')
+                    eval(code)
+                }
+            }
+            catch (e) {
+                console.log('Error', e)
+            }
             const liItem = document.createElement('li')
             liItem.innerHTML = reviewItem.content
 

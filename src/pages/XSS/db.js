@@ -1,4 +1,4 @@
-export const db = [{
+export const defaultDB = [{
     key: '1',
     id: '1',
     content: 'A nice movie',

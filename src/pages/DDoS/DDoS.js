@@ -46,7 +46,7 @@ class DDoS extends Component {
 
     addLogs = () => {
         const {logs} = this.state
-        const serverConsole = `tcp    0    0    ${this.getRandomIp()}:${this.getRandomPort()}\tSYN_RECV`
+        const serverConsole = `tcp    0    0    111.22.33.4:80    ${this.getRandomIp()}:${this.getRandomPort()}\tSYN_RECV`
         const fin = serverConsole.padEnd(40)
         this.setState({
             logs: [ ...logs, fin]

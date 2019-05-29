@@ -61,7 +61,6 @@ select * from user where user_name = '${keyword}'`
                   {/*Right*/}
                   <Col span={8}>
                       <Divider>Backend: 'user' Database</Divider>
-                      <Table dataSource={db} columns={columns}/>
                       <Divider>SQL Logger</Divider>
                       <pre>
                         <code className="sql">

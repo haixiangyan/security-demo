@@ -39,7 +39,7 @@ class SQLInject extends Component {
         const sql = `
 select * from user where user_name = '${keyword}'`
         // Drop database
-        if (keyword.indexOf('drop')) {
+        if (keyword.indexOf('drop') > 0 || keyword.indexOf('delete') > 0) {
             this.setState({
                 logs: [ ...logs, sql],
                 db: []

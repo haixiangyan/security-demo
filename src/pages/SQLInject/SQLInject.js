@@ -44,6 +44,7 @@ select * from user where user_name = '${keyword}'`
                 logs: [ ...logs, sql],
                 db: []
             })
+            localStorage.setItem('sqlInjectDB', '[]')
         }
 
         // Normal

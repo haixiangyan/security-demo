@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 import {Button, Col, Divider, Form, Icon, Input, notification, Row, message} from "antd"
 
 class CSRF extends Component {
@@ -11,10 +12,15 @@ class CSRF extends Component {
         }
     }
 
+    onClickEvil = () => {
+        const auth = sessionStorage.getItem('auth')
+        axios.get(`http://bank.example/withdraw?account=Bob&amount=1000000&for=Evil&auth=${auth}`)
+    }
+
     openNotification = () => {
         const key = `open${Date.now()}`
         const btn = (
-            <a href="#">http://bank.example/withdraw?account=Bob&amount=1000000&for=Evil</a>
+            <Button onClick={this.onClickEvil}>Click me</Button>
         )
         notification.open({
             message: 'Hacker Message',
@@ -33,6 +39,8 @@ class CSRF extends Component {
         this.setState({
             isLogin: true
         })
+
+        sessionStorage.setItem('auth', 'true')
 
         this.openNotification()
     }

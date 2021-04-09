@@ -11,4 +11,4 @@ $ yarn install
 $ yarn start
 ```
 
-Or check out the [published website](https://haixiang6123.github.io/security-demo/#/)
+Or check out the [published website](https://yanhaixiang.com/security-demo/#/)
